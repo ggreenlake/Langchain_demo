@@ -1,33 +1,19 @@
-from prompts.prompt_builder import build_prompt
-from langchain_ollama.llms import OllamaLLM
+from chains.chain_builder import build_chain
 
 def main():
-    # -----------------------------
-    # 1. 构建 prompt
-    # -----------------------------
-    profile_name = "Yuki"
-    scene_name = "cafe"
-    affection_level = 1  # 对应你的 levels 配置
-    prompt = build_prompt(profile_name, scene_name, affection_level)
+    user_id = "user_001"
+    profile = "yuki"
+    scene = "cafe"
 
-    # -----------------------------
-    # 2. 初始化模型
-    # -----------------------------
-    model = OllamaLLM(model="mistral", base_url="http://localhost:11434")
+    # 后端告知 affection level
+    affection_level = 1
 
-    # -----------------------------
-    # 3. 构建 chain
-    # -----------------------------
-    chain = prompt | model
+    chain = build_chain(user_id, profile, scene, affection_level)
 
-    # -----------------------------
-    # 4. 测试用户问题
-    # -----------------------------
     question = "Hello, what is the sun and moon?"
-    result = chain.invoke({"question": question})
-
-    print("===== Response =====")
-    print(result)
+    response = chain.invoke({"question": question})
+    print("Q:", question)
+    print("A:", response)
 
 if __name__ == "__main__":
     main()
