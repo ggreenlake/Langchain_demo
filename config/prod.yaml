@@ -1,0 +1,18 @@
+# 模型服务相关
+model_service:
+  base_url: "https://ollama.cloudservice.com"  # 云端 Ollama 服务
+  model_name: "mistral"                        # 正式模型
+
+# API Key
+api_keys:
+  openai: "sk-xxxx-prod"                        # 生产 key，保密
+
+# 日志配置
+log:
+  level: "INFO"                                 # 只记录重要信息
+  file: "logs/prod.log"
+
+# 数据库/存储
+# database:
+#  url: "postgresql://user:pass@dbserver:5432/appdb"  # 云端数据库
+#  rag_index_path: "rag/prod_index"                     # RAG 数据存储路径

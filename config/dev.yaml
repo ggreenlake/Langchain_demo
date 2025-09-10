@@ -1,0 +1,18 @@
+# 模型服务相关
+model_service:
+  base_url: "http://localhost:11434"   # Ollama 本地服务地址
+  model_name: "mistral"                # 默认模型
+
+# API Key（如果使用 OpenAI 或其他远程服务）
+api_keys:
+  openai: "sk-xxxx-dev"                # 开发用 key
+
+# 日志配置
+log:
+  level: "DEBUG"                        # 输出详细调试信息
+  file: "logs/dev.log"
+
+# 数据库/存储
+# database:
+#  url: "sqlite:///dev.db"               # 本地 SQLite，方便调试
+#  rag_index_path: "rag/dev_index"       # RAG 数据存储路径
