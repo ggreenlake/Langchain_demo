@@ -1,10 +1,14 @@
-from services.ChatService import ChatService
+from db.connection import get_connection
+
+def test_db():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("INSERT INTO users (user_name) VALUES (%s) RETURNING user_id;", ("123",))
+    user_id = cur.fetchone()["user_id"]
+    conn.commit()
+    cur.close()
+    conn.close()
+    print("插入成功，user_id=", user_id)
 
 if __name__ == "__main__":
-    ai = ChatService()
-
-    reply1 = ai.chat("wechat", "u123", "yuki", "cafe", 1, "Hi, who are you?")
-    print("AI:", reply1)
-
-    reply2 = ai.chat("wechat", "u123", "yuki", "cafe", 1, "Do you like tea?")
-    print("AI:", reply2)
+    test_db()
