@@ -54,3 +54,16 @@ CREATE TABLE error_logs (
     occurred_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,          -- 错误时间
     resolved BOOLEAN DEFAULT FALSE                            -- 是否已解决
 );
+
+-- 7. 对话简表
+CREATE TABLE conversations (
+    id SERIAL PRIMARY KEY,
+    platform VARCHAR(50) NOT NULL,                                                -- 平台（微信/QQ/网页等）
+    user_id VARCHAR(100) NOT NULL,                                                -- 用户ID
+    ai_id INT REFERENCES AIs(ai_id) ON DELETE SET NULL,                           -- 外键: AI角色
+    scene_id INT REFERENCES Scenes(scene_id) ON DELETE SET NULL,                  -- 外键: 场景
+    affection_level_id INT REFERENCES Affection_levels(af_id) ON DELETE SET NULL, -- 外键: 好感度
+    role VARCHAR(20) NOT NULL,                                                    -- user/ai/system
+    content TEXT NOT NULL,                                                        -- 聊天内容
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
