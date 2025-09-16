@@ -26,7 +26,7 @@ class ChatService:
             ai_text = result.content
         else:
             # 某些情况下 result 是 LLMResult
-            ai_text = result.generations[0][0].text
+            ai_text = result
 
         # 5. 保存 AI 回复
         self.Lmemory.save_message(platform, user_id, profile_name, "ai", result)
