@@ -3,6 +3,7 @@ import redis
 import time
 from typing import List, Dict
 from config.config import Config
+from langchain.schema import AIMessage, HumanMessage
 
 cfg = Config()
 
@@ -21,9 +22,15 @@ class ShortConversationMemoryManager:
     def add_message(self, user_id: int, ai_id: int, role: str, content: str):
         """添加一条消息到 Redis"""
         key = self._make_key(user_id, ai_id)
+
+        if hasattr(content, "content"):
+            msg_content = content.content
+        else:
+            msg_content = str(content)
+        
         entry = json.dumps({
             "role": role,
-            "content": content,
+            "content": msg_content,
             "timestamp": time.time()
         })
         # 右推入（保证顺序）

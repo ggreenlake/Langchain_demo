@@ -10,7 +10,7 @@ redis:
   port: 6379
   db: 0
   password: null
-  
+
 model:
   name: mistral
   base_url: http://localhost:11434
@@ -22,8 +22,6 @@ log:
   retention: "7 days" # 日志保留时间
 
 api:
-  wechat_token: "your_wechat_token"
-  openai_key: "your_openai_api_key"
-  third_party:
-    weather_api_key: "xxxx"
-    map_api_key: "xxxx"
+  Siliconflow: sk-zskshwraoywkfekdlsqotrzxtpzonsuvdzalcsweetrjbtyo
+  name: Qwen/Qwen3-8B
+  base_url:  https://api.siliconflow.cn/v1/chat/completions

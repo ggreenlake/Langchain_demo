@@ -1,7 +1,7 @@
 import yaml
 from langchain_core.prompts import ChatPromptTemplate
 from psycopg2.extras import RealDictCursor
-from db.connection import get_connection  # 你已有的
+from db.connection import get_connection  
 from typing import Any, Dict
 
 

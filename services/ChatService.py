@@ -22,9 +22,14 @@ class ChatService:
         # 4. 拼 context（这里你可以后续改成 LangChain 的 memory wrapper）
         context_text = "\n".join([f"{m['role']}: {m['content']}" for m in history])
         result = chain.invoke({"question": f"{context_text}\nUser: {user_input}"})
+        if hasattr(result, "content"):
+            ai_text = result.content
+        else:
+            # 某些情况下 result 是 LLMResult
+            ai_text = result.generations[0][0].text
 
         # 5. 保存 AI 回复
         self.Lmemory.save_message(platform, user_id, profile_name, "ai", result)
         self.Smemory.add_message(user_id, profile_name, "ai", result)
 
-        return result
+        return ai_text

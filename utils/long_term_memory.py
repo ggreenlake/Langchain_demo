@@ -1,12 +1,19 @@
 from typing import List, Dict
 from db.connection import get_connection
+from langchain.schema import AIMessage, HumanMessage
 
 
 class LongConversationMemoryManager:
 
     @staticmethod
-    def save_message(platform: str, user_id: int, ai_id: int, role: str, content: str):
-        """存一条对话到数据库"""
+    def save_message(platform: str, user_id: int, ai_id: int, role: str, message):
+        """存一条对话到数据库，兼容 AIMessage / HumanMessage / str"""
+    # 判断类型并获取内容
+        if isinstance(message, AIMessage) or isinstance(message, HumanMessage):
+            content = message.content
+        else:
+            content = str(message)
+
         conn = get_connection()
         try:
             with conn.cursor() as cur:
