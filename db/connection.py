@@ -1,15 +1,17 @@
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import os
+from config.config import Config
 
-#修改成你自己的数据库内容
+cfg = Config()
 
 def get_connection():
+    db_cfg = cfg.database
+
     return psycopg2.connect(
-        dbname=os.getenv("POSTGRES_DB", "ai_service_db"),
-        user=os.getenv("POSTGRES_USER", "postgres"),
-        password=os.getenv("POSTGRES_PASSWORD", "guyanzhang123"), 
-        host=os.getenv("POSTGRES_HOST", "localhost"),
-        port=os.getenv("POSTGRES_PORT", 5432),
+        dbname=db_cfg.get("name"),
+        user=db_cfg.get("user"),
+        password=db_cfg.get("password"),
+        host=db_cfg.get("host"),
+        port=db_cfg.get("port"),
         cursor_factory=RealDictCursor
     )

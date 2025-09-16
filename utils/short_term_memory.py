@@ -2,13 +2,16 @@ import json
 import redis
 import time
 from typing import List, Dict
+from config.config import Config
+
+cfg = Config()
 
 class ShortConversationMemoryManager:
-    def __init__(self, redis_url="redis://localhost:6379/0", history_size=20):
+    def __init__(self, history_size=20):
         """
-        :param redis_url: Redis 连接地址
         :param history_size: 要保留的消息条数（不是轮数）
         """
+        redis_url = cfg.redis_url()
         self.redis = redis.from_url(redis_url, decode_responses=True)
         self.history_size = history_size
 
