@@ -62,7 +62,7 @@ CREATE TABLE conversations (
     user_id VARCHAR(100) NOT NULL,                                                -- 用户ID
     ai_id INT REFERENCES AIs(ai_id) ON DELETE SET NULL,                           -- 外键: AI角色
     scene_id INT REFERENCES Scenes(scene_id) ON DELETE SET NULL,                  -- 外键: 场景
-    affection_level_id INT REFERENCES Affection_levels(af_id) ON DELETE SET NULL, -- 外键: 好感度
+    affection_level_id INT,                                                       -- 外键: 好感度
     role VARCHAR(20) NOT NULL,                                                    -- user/ai/system
     content TEXT NOT NULL,                                                        -- 聊天内容
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

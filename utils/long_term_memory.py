@@ -6,7 +6,7 @@ from langchain.schema import AIMessage, HumanMessage
 class LongConversationMemoryManager:
 
     @staticmethod
-    def save_message(platform: str, user_id: int, ai_id: int, role: str, message):
+    def save_message(platform: str, user_id: int, ai_id: int, scene_id: int, affection_level:int, role: str, message):
         """存一条对话到数据库，兼容 AIMessage / HumanMessage / str"""
     # 判断类型并获取内容
         if isinstance(message, AIMessage) or isinstance(message, HumanMessage):
@@ -19,10 +19,10 @@ class LongConversationMemoryManager:
             with conn.cursor() as cur:
                 cur.execute(
                     """
-                    INSERT INTO conversations (platform, user_id, ai_id, role, content)
-                    VALUES (%s, %s, %s, %s, %s)
+                    INSERT INTO conversations (platform, user_id, ai_id, scene_id, affection_level_id, role, content)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
                     """,
-                    (platform, user_id, ai_id, role, content)
+                    (platform, user_id, ai_id, scene_id, affection_level, role, content)
                 )
             conn.commit()
         finally:
