@@ -8,7 +8,7 @@ from langchain.schema import AIMessage, HumanMessage
 cfg = Config()
 
 class ShortConversationMemoryManager:
-    def __init__(self, history_size=20):
+    def __init__(self, history_size=5):
         """
         :param history_size: 要保留的消息条数（不是轮数）
         """

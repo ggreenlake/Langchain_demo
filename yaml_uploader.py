@@ -80,10 +80,10 @@ def upload_yaml(yaml_path: str, table: str, as_json=False, ai_id: int = None):
 
 if __name__ == "__main__":
     # 上传 profile
-    # ai_id = upload_yaml("D:\\profiles\\Yuki\\profile.yaml", "AIs")
+#     ai_id = upload_yaml("D:\\profiles\\Yuki\\profile.yaml", "AIs")
 
     # 上传对应的 scene
-     upload_yaml("D:\\profiles\\Yuki\\scenes\\lawn.yaml", "Scenes", ai_id=1)
+#    upload_yaml("D:\\profiles\\Yuki\\scenes\\cafe.yaml", "Scenes", ai_id=1)
 
     # 上传对应的 affection level
-    # upload_yaml("D:\\profiles\\Yuki\\affection\\affection_rules.yaml", "Affection_levels", ai_id=1)
+     upload_yaml("D:\\profiles\\Yuki\\affection\\affection_rules.yaml", "Affection_levels", ai_id=1)

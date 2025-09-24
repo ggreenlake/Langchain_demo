@@ -1,5 +1,5 @@
 database:
-  host: localhost
+  host: 8.155.172.25
   port: 5432
   name: ai_service_db
   user: postgres
@@ -25,3 +25,5 @@ api:
   Siliconflow: sk-zskshwraoywkfekdlsqotrzxtpzonsuvdzalcsweetrjbtyo
   name: Qwen/Qwen3-8B
   base_url:  https://api.siliconflow.cn/v1/chat/completions
+
+

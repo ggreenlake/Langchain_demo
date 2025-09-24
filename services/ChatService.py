@@ -1,7 +1,7 @@
 from utils.short_term_memory import ShortConversationMemoryManager
 from chains.chain_builder import build_chain
 from utils.long_term_memory import LongConversationMemoryManager
-
+import re
 
 class ChatService:
     def __init__(self):
@@ -23,12 +23,18 @@ class ChatService:
         else: 
             ai_text = result
 
+        # 去掉 <think>...</think> 内容
+        ai_text = re.sub(r"<think>.*?</think>", "", ai_text, flags=re.S)
+
+        # 去掉多余空格/换行
+        ai_text = ai_text.strip()
+
         #4. 保存用户消息
         self.Smemory.add_message(user_id, profile_name, "user", user_input)
         self.Lmemory.save_message(platform, user_id, profile_name, scene_name, affection_level, "user", user_input)
 
         #5. 保存 AI 回复
-        self.Lmemory.save_message(platform, user_id, profile_name, scene_name, affection_level, "ai", result)
-        self.Smemory.add_message(user_id, profile_name, "ai", result)
+        self.Lmemory.save_message(platform, user_id, profile_name, scene_name, affection_level, "ai", ai_text)
+        self.Smemory.add_message(user_id, profile_name, "ai", ai_text)
 
         return ai_text
