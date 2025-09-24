@@ -1,11 +1,13 @@
 from services.ChatService import ChatService
 from acfilter.acfilter import ACDetector
-from acfilter.build import ACAutomation
+from acfilter.ACAutomaton import ACAutomaton
 
 if __name__ == "__main__":
     ai = ChatService()
-    Input = "Hello, I am Sam.Can you tell me who you are?"
+    Input = "你好，你会使用网购吗？"
     Ac = ACDetector()
-    print(Ac(Input))
-    # reply1 = ai.chat("wechat", 123, 1, 2, 1 , Input)
-    # print("AI:", reply1)
+    if Ac.has_sensitive_words(Input):
+        print("Not suitable!")
+    else:
+        reply1 = ai.chat("wechat", 123, 1, 2, 1 , Input)
+        print("AI:", reply1)
