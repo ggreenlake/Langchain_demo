@@ -41,3 +41,10 @@ class Config:
             f"postgresql://{conf['user']}:{conf['password']}@"
             f"{conf['host']}:{conf['port']}/{conf['dbname']}"
         )
+
+    def safe_url(self) -> str:
+        """返回ai安全层的url地址"""
+        return (
+            f"postgresql://{conf['user']}:{conf['password']}@"
+            f"{conf['host']}:{conf['port']}/{conf['dbname']}"
+        )
